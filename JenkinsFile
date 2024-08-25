@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+
+    environment {
+        DIRECTORY_PATH = "/path/to/code"
+        TESTING_ENVIRONMENT = "TestEnv"
+        PRODUCTION_ENVIRONMENT = "Krishi"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo "Fetching the source code from the directory path specified by DIRECTORY_PATH environment variable"
+                // Example of actual code fetching:
+                // sh "git clone https://github.com/your/repository.git ${env.DIRECTORY_PATH}"
+                echo "Compiling the code and generating any necessary artifacts"
+                // Add actual compile command here, e.g., "mvn clean package"
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Running Unit tests"
+                // Replace with actual test command, e.g., "mvn test"
+                echo "Running Integration tests"
+                // Replace with integration test command
+            }
+        }
+        stage('Code Quality Check') {
+            steps {
+                echo "Checking the quality of the code"
+                // Add a code quality tool like SonarQube if needed, e.g., "sonar-scanner"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo "Deploying the application to a testing environment: ${TESTING_ENVIRONMENT}"
+                // Add deployment command here, e.g., "scp -r ${env.DIRECTORY_PATH} user@testenv:/path/to/deploy"
+            }
+        }
+        stage('Approval') {
+            steps {
+                script {
+                    input message: 'Do you approve the deployment to production?', ok: 'Approve'
+                }
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploying the code to the production environment: ${PRODUCTION_ENVIRONMENT}"
+                // Add production deployment command here, e.g., "scp -r ${env.DIRECTORY_PATH} user@production:/path/to/deploy"
+            }
+        }
+    }
+}
