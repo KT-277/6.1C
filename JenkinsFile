@@ -6,7 +6,7 @@ pipeline {
         TESTING_ENVIRONMENT = "TestEnv"
         PRODUCTION_ENVIRONMENT = "Krishi"
         // Email settings - replace with actual email addresses
-        EMAIL_RECIPIENTS = "dev-team@example.com"
+        EMAIL_RECIPIENTS = "krishitharani@gmail.com"
     }
 
     stages {
