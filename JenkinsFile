@@ -102,7 +102,7 @@ pipeline {
     post {
         always {
             mail to: "krishitharani@gmail.com",
-                subject: "Pipeline Completed: ${currentBuild.fullDisplayName}",
+                subject: "Pipeline Completed",
                 body: "Pipeline completed. Check Jenkins for details: ${env.BUILD_URL}"
         }
     }
